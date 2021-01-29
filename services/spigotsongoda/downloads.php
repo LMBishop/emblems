@@ -17,7 +17,7 @@ function get_spigot_downloads($spigot_id) {
     }
 }
 
-function get_downloads($songoda_slug) {
+function get_songoda_downloads($songoda_slug) {
     if($songoda_slug != null) {
         $page = file_get_contents("https://songoda.com/api/products/" . $songoda_slug);
         $firstpart = explode("\"downloads\":", $page)[1];
@@ -29,7 +29,7 @@ function get_downloads($songoda_slug) {
 }
 
 function get_total_downloads() {
-    return (get_bukkit_downloads($_GET['songoda']) + get_spigot_downloads($_GET['spigot']));
+    return (get_songoda_downloads($_GET['songoda']) + get_spigot_downloads($_GET['spigot']));
 }
 
 BadgeUtils::printBadge($name, number_format(strval(get_total_downloads())), $color);
