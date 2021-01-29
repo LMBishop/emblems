@@ -6,9 +6,9 @@ $name = isset($_GET['name']) ? $_GET['name'] : "downloads";
 header("Content-Type: image/svg+xml");
 header("Cache-Control: max-age=" . $cache);
 
-function get_downloads($name) {
-    if($name != null) {
-        $page = file_get_contents("https://songoda.com/api/products/" . $name);
+function get_downloads($slug) {
+    if($slug != null) {
+        $page = file_get_contents("https://songoda.com/api/products/" . $slug);
         $firstpart = explode("\"downloads\": ", $page)[1];
         $downloads = explode(",", $firstpart)[0];
         return intval($downloads);
